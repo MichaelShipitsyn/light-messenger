@@ -140,6 +140,7 @@ module.exports = {
       ...rem(400),
       ...rem(500),
       ...rem(615),
+      ...rem(1010),
       '115-em': em(115),
     },
     animation: {
