@@ -5,13 +5,13 @@ import { EditProfileBody, getMeSchema, getUsersSchema } from './user.schema';
 export const userController = async (server: FastifyInstance) => {
   server.get(
     '/me',
-    { onRequest: [server.authenticate], schema: getUsersSchema },
+    { onRequest: [server.authenticate], schema: getMeSchema },
     getMe,
   );
 
   server.get(
     '/all',
-    { onRequest: [server.authenticate], schema: getMeSchema },
+    { onRequest: [server.authenticate], schema: getUsersSchema },
     getUsers,
   );
 
