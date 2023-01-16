@@ -1,6 +1,6 @@
 import { createRouteView, Link } from 'atomic-router-react';
 import { Heading } from '@lm-client/shared/ui';
-import { SignInForm } from '@lm-client/features/auth/sign-in-form';
+import { SignInForm } from '@lm-client/features/auth';
 import { routes } from '@lm-client/shared/routes';
 
 export const SignInPage = createRouteView({

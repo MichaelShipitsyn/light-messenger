@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 type HeadingAsVariants = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type HeadingSizes = 'xl' | 'lg' | 'md' | 'sm' | 'xs';
@@ -57,13 +56,11 @@ export const Heading = forwardRef(
       <HeadingComponent
         {...headingProps}
         ref={ref}
-        className={twMerge(
-          clsx(
-            'font-700',
-            headingFontSizes[size],
-            headingLineClamps[headingLineClamp],
-            className
-          )
+        className={clsx(
+          'font-700',
+          headingFontSizes[size],
+          headingLineClamps[headingLineClamp],
+          className
         )}
       >
         {children}

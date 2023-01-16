@@ -11,6 +11,7 @@ export const routes = {
   signUp: createRoute(),
   signIn: createRoute(),
   home: createRoute(),
+  profile: createRoute(),
 };
 
 export function chainAuthorized<Params extends RouteParams>(

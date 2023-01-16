@@ -133,6 +133,8 @@ module.exports = {
       ...rem(48),
       ...rem(50),
       ...rem(60),
+      ...rem(70),
+      ...rem(75),
       ...rem(100),
       ...rem(150),
       ...rem(200),
@@ -149,6 +151,8 @@ module.exports = {
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
+      fadeIn: 'fadeIn 0.3s',
+      fadeOut: 'fadeOut 0.3s',
     },
     aspectRatio: {
       auto: 'auto',
@@ -565,6 +569,14 @@ module.exports = {
           transform: 'none',
           animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
         },
+      },
+      fadeIn: {
+        '0%': { opacity: 0 },
+        '100%': { opacity: 1 },
+      },
+      fadeOut: {
+        '0%': { opacity: 1 },
+        '100%': { opacity: 0 },
       },
     },
     letterSpacing: {

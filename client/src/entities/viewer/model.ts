@@ -1,5 +1,4 @@
 import { createEvent, createStore, sample } from 'effector';
-import { reset } from 'patronum/reset';
 import * as api from '@lm-client/shared/api';
 import type { User } from '@lm-client/shared/types';
 
@@ -16,9 +15,4 @@ sample({
 sample({
   clock: api.getViewerFx.doneData,
   target: $viewer,
-});
-
-reset({
-  clock: api.logoutFx.doneData,
-  target: api.$token,
 });
