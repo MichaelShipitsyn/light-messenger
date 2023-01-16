@@ -27,7 +27,7 @@
     "patronum": "^1.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-number-format": "^5.0.1",
+    "react-number-format": "^5.1.3",
     "tailwind-merge": "^1.6.1",
     "typed-contracts": "^3.0.0"
   },
