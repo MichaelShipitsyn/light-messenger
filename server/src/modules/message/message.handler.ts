@@ -37,6 +37,11 @@ export const createMessage = async (
     },
   });
 
+  await request.prisma.dialog.update({
+    where: { id: dialogId },
+    data: { messageId: createdMessage.id },
+  });
+
   if (recipientId) {
     console.log(createdMessage, recipientId);
     request.io
@@ -101,7 +106,7 @@ export const editMessage = async (
 
   const editedMessage = await request.prisma.message.update({
     where: { id },
-    data: { text },
+    data: { text, updatedAt: new Date().toISOString() },
   });
 
   if (recipientId) {

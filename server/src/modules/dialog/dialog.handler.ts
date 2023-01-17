@@ -13,7 +13,7 @@ export const createDialog = async (
   const { recipientId, message } = request.body;
   const { id: dialogId } = await request.prisma.dialog.create({ data: {} });
 
-  await Promise.all([
+  const [, createdMessage] = await Promise.all([
     request.prisma.participant.createMany({
       data: [
         {
@@ -35,6 +35,11 @@ export const createDialog = async (
     }),
   ]);
 
+  await request.prisma.dialog.update({
+    where: { id: dialogId },
+    data: { messageId: createdMessage.id },
+  });
+
   const createdDialog = await request.prisma.dialog.findUnique({
     where: {
       id: dialogId,
@@ -42,6 +47,7 @@ export const createDialog = async (
     include: {
       participants: { include: { user: { include: { profile: true } } } },
       messages: true,
+      lastMessage: { include: { creator: { include: { profile: true } } } },
     },
   });
 
@@ -65,6 +71,7 @@ export const getDialogById = async (
     include: {
       participants: { include: { user: { include: { profile: true } } } },
       messages: true,
+      lastMessage: { include: { creator: { include: { profile: true } } } },
     },
   });
 
@@ -81,7 +88,6 @@ export const getAllDialogs = async (
 ) => {
   const currentUserId = request.user.id;
 
-  //! need a pagination ?
   const dialogs = await request.prisma.dialog.findMany({
     where: {
       participants: {
@@ -93,7 +99,9 @@ export const getAllDialogs = async (
     include: {
       participants: { include: { user: { include: { profile: true } } } },
       messages: true,
+      lastMessage: { include: { creator: { include: { profile: true } } } },
     },
+    orderBy: [{ lastMessage: { createdAt: 'desc' } }],
   });
 
   return reply.status(200).send(dialogs);

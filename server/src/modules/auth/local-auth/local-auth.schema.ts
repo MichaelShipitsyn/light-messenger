@@ -8,6 +8,8 @@ const userResponseWithToken = {
       username: { type: 'string', examples: ['user1'] },
       email: { type: 'string', examples: ['user1@example.com'] },
       phoneNumber: { type: 'string', examples: ['87777777777'] },
+      createdAt: { type: 'string' },
+      updatedAt: { type: 'string' },
       profile: {
         type: ['object', 'null'],
         properties: {
@@ -16,6 +18,8 @@ const userResponseWithToken = {
             examples: ['http://localhost:8080/profile/avatar.jpg'],
           },
           bio: { type: 'string', examples: ['Hello world!'] },
+          createdAt: { type: 'string' },
+          updatedAt: { type: 'string' },
         },
       },
     },

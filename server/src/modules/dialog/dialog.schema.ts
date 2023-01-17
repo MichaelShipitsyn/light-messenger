@@ -16,6 +16,8 @@ export const createDialogSchema = {
       type: 'object',
       properties: {
         id: { type: 'number' },
+        createdAt: { type: 'string' },
+        updatedAt: { type: 'string' },
         messages: {
           type: 'array',
           items: {
@@ -25,6 +27,8 @@ export const createDialogSchema = {
               text: { type: 'string' },
               creatorId: { type: 'number' },
               dialogId: { type: 'number' },
+              createdAt: { type: 'string' },
+              updatedAt: { type: 'string' },
             },
           },
         },
@@ -41,12 +45,38 @@ export const createDialogSchema = {
                   email: { type: 'string' },
                   phoneNumber: { type: 'string' },
                   username: { type: 'string' },
+                  createdAt: { type: 'string' },
+                  updatedAt: { type: 'string' },
                   profile: {
                     type: ['object', 'null'],
                     properties: {
                       avatar: { type: 'string' },
                       bio: { type: 'string' },
+                      createdAt: { type: 'string' },
+                      updatedAt: { type: 'string' },
                     },
+                  },
+                },
+              },
+            },
+          },
+        },
+        lastMessage: {
+          type: ['object', 'null'],
+          properties: {
+            id: { type: 'number' },
+            text: { type: 'string' },
+            createdAt: { type: 'string' },
+            updatedAt: { type: 'string' },
+            creator: {
+              type: 'object',
+              properties: {
+                id: { type: 'number' },
+                username: { type: 'string' },
+                profile: {
+                  type: ['object', 'null'],
+                  properties: {
+                    avatar: { type: 'string' },
                   },
                 },
               },
@@ -84,6 +114,8 @@ export const getDialogByIdSchema = {
       type: 'object',
       properties: {
         id: { type: 'number' },
+        createdAt: { type: 'string' },
+        updatedAt: { type: 'string' },
         messages: {
           type: 'array',
           items: {
@@ -93,6 +125,8 @@ export const getDialogByIdSchema = {
               text: { type: 'string' },
               creatorId: { type: 'number' },
               dialogId: { type: 'number' },
+              createdAt: { type: 'string' },
+              updatedAt: { type: 'string' },
             },
           },
         },
@@ -109,12 +143,38 @@ export const getDialogByIdSchema = {
                   email: { type: 'string' },
                   phoneNumber: { type: 'string' },
                   username: { type: 'string' },
+                  createdAt: { type: 'string' },
+                  updatedAt: { type: 'string' },
                   profile: {
                     type: ['object', 'null'],
                     properties: {
                       avatar: { type: 'string' },
                       bio: { type: 'string' },
+                      createdAt: { type: 'string' },
+                      updatedAt: { type: 'string' },
                     },
+                  },
+                },
+              },
+            },
+          },
+        },
+        lastMessage: {
+          type: ['object', 'null'],
+          properties: {
+            id: { type: 'number' },
+            text: { type: 'string' },
+            createdAt: { type: 'string' },
+            updatedAt: { type: 'string' },
+            creator: {
+              type: 'object',
+              properties: {
+                id: { type: 'number' },
+                username: { type: 'string' },
+                profile: {
+                  type: ['object', 'null'],
+                  properties: {
+                    avatar: { type: 'string' },
                   },
                 },
               },
@@ -148,6 +208,8 @@ export const getAllDialogsSchema = {
         type: 'object',
         properties: {
           id: { type: 'number' },
+          createdAt: { type: 'string' },
+          updatedAt: { type: 'string' },
           messages: {
             type: 'array',
             items: {
@@ -157,6 +219,8 @@ export const getAllDialogsSchema = {
                 text: { type: 'string' },
                 creatorId: { type: 'number' },
                 dialogId: { type: 'number' },
+                createdAt: { type: 'string' },
+                updatedAt: { type: 'string' },
               },
             },
           },
@@ -173,12 +237,38 @@ export const getAllDialogsSchema = {
                     email: { type: 'string' },
                     phoneNumber: { type: 'string' },
                     username: { type: 'string' },
+                    createdAt: { type: 'string' },
+                    updatedAt: { type: 'string' },
                     profile: {
                       type: ['object', 'null'],
                       properties: {
                         avatar: { type: 'string' },
                         bio: { type: 'string' },
+                        createdAt: { type: 'string' },
+                        updatedAt: { type: 'string' },
                       },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          lastMessage: {
+            type: ['object', 'null'],
+            properties: {
+              id: { type: 'number' },
+              text: { type: 'string' },
+              createdAt: { type: 'string' },
+              updatedAt: { type: 'string' },
+              creator: {
+                type: 'object',
+                properties: {
+                  id: { type: 'number' },
+                  username: { type: 'string' },
+                  profile: {
+                    type: ['object', 'null'],
+                    properties: {
+                      avatar: { type: 'string' },
                     },
                   },
                 },
