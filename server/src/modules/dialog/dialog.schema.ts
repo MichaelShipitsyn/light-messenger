@@ -334,4 +334,4 @@ export const deleteDialogSchema = {
 
 export type DeleteDialogParams = { id: number };
 export type GetDialogByIdParams = { id: number };
-export type CreateDialogBody = FromSchema<typeof createDialogSchema['body']>;
+export type CreateDialogBody = FromSchema<(typeof createDialogSchema)['body']>;
