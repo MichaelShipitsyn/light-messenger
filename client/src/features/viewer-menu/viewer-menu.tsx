@@ -2,7 +2,7 @@ import { Popup } from '@lm-client/shared/ui';
 import { useUnit } from 'effector-react';
 import { cloneElement, useRef } from 'react';
 import * as model from './model';
-
+//! move this to shared/ui
 type ViewerMenuProps<T extends HTMLElement = HTMLElement> = {
   menu: React.ReactElement[];
   anchorElement: React.RefObject<T | null>;

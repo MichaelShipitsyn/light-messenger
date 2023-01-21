@@ -237,6 +237,7 @@ module.exports = {
       ...rem(8),
       ...rem(16),
       ...rem(20),
+      full: '9999px',
     },
     borderSpacing: ({ theme }) => ({
       ...theme('spacing'),

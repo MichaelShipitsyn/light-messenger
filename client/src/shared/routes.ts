@@ -32,3 +32,5 @@ export function chainAuthorized<Params extends RouteParams>(
     cancelOn: api.getViewerFx.failData,
   });
 }
+
+export const authorizedHome = chainAuthorized(routes.home);

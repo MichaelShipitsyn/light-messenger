@@ -1,8 +1,14 @@
-import { createRouteView, Link } from 'atomic-router-react';
-import { chainAuthorized, routes } from '@lm-client/shared/routes';
+import { combine } from 'effector';
+import { list, variant } from '@effector/reflect';
+import { createRouteView } from 'atomic-router-react';
+import { authorizedHome } from '@lm-client/shared/routes';
 import { Header } from '@lm-client/widgets/header';
+import { DialogCard } from '@lm-client/entities/dialog';
+import { Dialog } from '@lm-client/shared/types';
+import * as dialogsModel from '@lm-client/entities/dialog';
+import * as viewerModel from '@lm-client/entities/viewer';
 
-export const authorizedHome = chainAuthorized(routes.home);
+dialogsModel.$dialogs.watch(console.log);
 
 export const HomePage = createRouteView({
   route: authorizedHome,
@@ -10,13 +16,69 @@ export const HomePage = createRouteView({
     return (
       <>
         <Header />
-        <Link to={routes.signIn} className="text-14 text-blue hover:underline">
+        {/* <Link to={routes.signIn} className="text-14 text-blue hover:underline">
           Auth page
-        </Link>
+        </Link> */}
+        <div className="grid  grid-flow-row grid-cols-7">
+          <div className="col-span-2 border-r-2 border-r-blue">
+            {/* Add search bar and then change calc */}
+            <ul className="h-[calc(100vh-2rem-5rem)] overflow-auto py-15">
+              <PageContent />
+            </ul>
+          </div>
+          <div className="col-span-5">Placeholder</div>
+        </div>
       </>
     );
   },
   otherwise() {
     return <div>Loading...</div>;
+  },
+});
+
+const DialogList = list<
+  Dialog,
+  Pick<Dialog, 'id' | 'lastMessage' | 'participants'> & {
+    currentViewerId: number;
+  }
+>({
+  view: ({ id, lastMessage, currentViewerId, participants }) => (
+    <li className="px-15 py-10 transition-colors hover:bg-blue">
+      <DialogCard
+        id={id}
+        lastMessage={lastMessage}
+        currentViewerId={currentViewerId}
+        participants={participants}
+      />
+    </li>
+  ),
+  source: dialogsModel.$dialogs,
+  bind: {
+    currentViewerId: viewerModel.$viewer.map((user) => user?.id ?? 0),
+  },
+  mapItem: {
+    id: (dialog) => dialog.id,
+    lastMessage: (dialog) => dialog.lastMessage,
+    participants: (dialog) => dialog.participants,
+  },
+  getKey: (dialog) => dialog.id.toString(),
+});
+
+const PageContent = variant({
+  source: combine(
+    {
+      status: dialogsModel.$dialogsStatus,
+      isEmpty: dialogsModel.$dialogs.map((dialogs) => dialogs.length === 0),
+    },
+    ({ status, isEmpty }) => {
+      if (status === 'pending') return 'loading';
+      if (isEmpty) return 'empty';
+      return 'ready';
+    }
+  ),
+  cases: {
+    loading: () => <div>Loading...</div>,
+    empty: () => <p>No dialogs....</p>,
+    ready: DialogList,
   },
 });
