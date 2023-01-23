@@ -5658,14 +5658,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/ui@npm:^0.26.3":
-  version: 0.26.3
-  resolution: "@vitest/ui@npm:0.26.3"
+"@vitest/ui@npm:^0.27.3":
+  version: 0.27.3
+  resolution: "@vitest/ui@npm:0.27.3"
   dependencies:
     fast-glob: ^3.2.12
     flatted: ^3.2.7
     sirv: ^2.0.2
-  checksum: b50b3ca158c7a6b4ed418ae4daf82538b79e241907946b8b48980ce618e415d72065f2f978c205ea23b302fbd1131996ebf47b80b028302c4620cefdd8c98ab3
+  checksum: ecf643a536b5895c0c6d5c49c177e8c4055f344e6fafe4dabefc42c20a560c3ca5eebf30a91b731d5d15e9922dc1f57a0825b0fcc8a9532a2890dec5fef15553
   languageName: node
   linkType: hard
 
@@ -7828,7 +7828,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.39.0
     "@typescript-eslint/parser": ^5.48.1
     "@vitejs/plugin-react": ^2.2.0
-    "@vitest/ui": ^0.26.3
+    "@vitest/ui": ^0.27.3
     atomic-router: ^0.7.1
     atomic-router-react: ^0.8.0
     autoprefixer: ^10.4.12
