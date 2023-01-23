@@ -5,3 +5,4 @@ export * from './heading';
 export * from './text';
 export * from './portal';
 export * from './popup';
+export * from './menu';

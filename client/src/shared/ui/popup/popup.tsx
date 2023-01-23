@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Portal } from '@lm-client/shared/ui';
 import { useOnClickOutside } from '@lm-client/shared/hooks';
 import clsx from 'clsx';
@@ -9,10 +9,10 @@ type PopupProps<
 > = {
   open: boolean;
   onClose: () => void;
-  anchorElement: T;
+  anchorElement: React.RefObject<T | null>;
   children: React.ReactNode;
   className?: string;
-  secondContainerRef?: React.RefObject<S>;
+  triggerRef?: React.RefObject<S | null>;
 };
 
 export const Popup = ({
@@ -21,20 +21,21 @@ export const Popup = ({
   anchorElement,
   children,
   className,
-  secondContainerRef,
+  triggerRef,
 }: PopupProps) => {
-  const containerRef = useOnClickOutside<HTMLDivElement>(
-    onClose,
-    secondContainerRef
-  );
+  const containerRef = useOnClickOutside<HTMLDivElement>(onClose, triggerRef);
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(0);
 
-  const { left, top } = useMemo(() => {
-    const anchorRect = anchorElement.getBoundingClientRect();
+  useLayoutEffect(() => {
+    const anchorCurrent = anchorElement.current;
 
-    const left = anchorRect.left;
-    const top = anchorRect.top + anchorRect.height;
+    if (anchorCurrent) {
+      const anchorRect = anchorCurrent.getBoundingClientRect();
 
-    return { left, top };
+      setLeft(anchorRect.left);
+      setTop(anchorRect.top + anchorRect.height);
+    }
   }, [anchorElement]);
 
   return (

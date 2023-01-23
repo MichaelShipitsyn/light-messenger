@@ -5,7 +5,7 @@ export const useOnClickOutside = <
   S extends HTMLElement = HTMLElement
 >(
   handler: (event: MouseEvent | TouchEvent) => void,
-  secondContainerRef?: React.RefObject<S>
+  triggerRef?: React.RefObject<S | null>
 ) => {
   const containerRef = useRef<T>(null);
 
@@ -16,7 +16,7 @@ export const useOnClickOutside = <
         (event.target instanceof Node &&
           containerRef.current.contains(event.target)) ||
         (event.target instanceof Node &&
-          secondContainerRef?.current?.contains(event.target))
+          triggerRef?.current?.contains(event.target))
       ) {
         return;
       }
@@ -29,7 +29,7 @@ export const useOnClickOutside = <
       window.removeEventListener('mousedown', listener);
       window.removeEventListener('touchstart', listener);
     };
-  }, [containerRef, secondContainerRef, handler]);
+  }, [containerRef, triggerRef, handler]);
 
   return containerRef;
 };
