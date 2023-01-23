@@ -20,7 +20,7 @@
     "clsx": "^1.2.1",
     "composable-forms": "^0.1.19",
     "effector": "^22.4.0",
-    "effector-react": "^22.3.3",
+    "effector-react": "^22.4.0",
     "effector-storage": "^5.0.1",
     "history": "^5.3.0",
     "joi": "^17.7.0",

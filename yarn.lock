@@ -7837,7 +7837,7 @@ __metadata:
     composable-forms: ^0.1.19
     effector: ^22.4.0
     effector-openapi-preset: ^0.3.3
-    effector-react: ^22.3.3
+    effector-react: ^22.4.0
     effector-storage: ^5.0.1
     eslint: ^8.31.0
     eslint-config-prettier: ^8.5.0
@@ -9007,15 +9007,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"effector-react@npm:^22.3.3":
-  version: 22.3.3
-  resolution: "effector-react@npm:22.3.3"
+"effector-react@npm:^22.4.0":
+  version: 22.4.0
+  resolution: "effector-react@npm:22.4.0"
   dependencies:
     use-sync-external-store: ^1.0.0
   peerDependencies:
     effector: ^22.0.2
     react: ">=16.8.0 <19.0.0"
-  checksum: b5e3b98b1ac2923149043762d6838b1b367afd5aa5605b535079573949bb005da30398d80697ea3c2957267499f264da1fd41eb01ff76dee57a060168d43c99d
+  checksum: b0f6ff5e037ecefaeb6e0aa2c336693d5aca41f20baedd493045aa5717f5e0bb65994d5a4e0ea3a3712e4387a424b3cb579fdb5fe8b5456a4d3bbcbbe550f50a
   languageName: node
   linkType: hard
 
