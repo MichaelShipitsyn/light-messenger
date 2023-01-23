@@ -1,3 +1,4 @@
+import { formatTime } from '@lm-client/shared/libs';
 import type { Dialog } from '@lm-client/shared/types';
 
 type DialogCardProps = Pick<Dialog, 'id' | 'lastMessage' | 'participants'> & {
@@ -14,7 +15,6 @@ export const DialogCard = ({
   const interlocutor = participants.find(
     (participant) => participant.userId !== currentViewerId
   );
-  //? use dayjs for formatting dates
 
   return (
     <div className="flex cursor-pointer items-center gap-5">
@@ -22,7 +22,7 @@ export const DialogCard = ({
         <div className="h-48 w-48 rounded-full bg-black-200">
           <img src="" alt="Avatar" />
         </div>
-        <div className="flex flex-col gap-5 text-14">
+        <div className="flex flex-col gap-5 self-start text-14">
           <p className="line-clamp-1">{interlocutor?.user.username}</p>
           <p className="line-clamp-1">
             {isMyLastMessage && (
@@ -33,7 +33,9 @@ export const DialogCard = ({
         </div>
       </div>
       <div className="flex-1 self-start">
-        <p className="whitespace-nowrap text-11">1:13 AM</p>
+        <p className="whitespace-nowrap text-11">
+          {formatTime(lastMessage.createdAt)}
+        </p>
       </div>
     </div>
   );

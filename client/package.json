@@ -19,6 +19,7 @@
     "atomic-router-react": "^0.8.0",
     "clsx": "^1.2.1",
     "composable-forms": "^0.1.19",
+    "dayjs": "^1.11.7",
     "effector": "^22.4.0",
     "effector-react": "^22.4.0",
     "effector-storage": "^5.0.1",

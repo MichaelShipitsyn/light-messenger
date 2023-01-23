@@ -7894,6 +7894,7 @@ __metadata:
     babel-loader: ^9.1.2
     clsx: ^1.2.1
     composable-forms: ^0.1.19
+    dayjs: ^1.11.7
     effector: ^22.4.0
     effector-openapi-preset: ^0.3.3
     effector-react: ^22.4.0
@@ -8565,6 +8566,13 @@ __metadata:
   version: 4.6.3
   resolution: "dateformat@npm:4.6.3"
   checksum: c3aa0617c0a5b30595122bc8d1bee6276a9221e4d392087b41cbbdf175d9662ae0e50d0d6dcdf45caeac5153c4b5b0844265f8cd2b2245451e3da19e39e3b65d
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.7":
+  version: 1.11.7
+  resolution: "dayjs@npm:1.11.7"
+  checksum: 5003a7c1dd9ed51385beb658231c3548700b82d3548c0cfbe549d85f2d08e90e972510282b7506941452c58d32136d6362f009c77ca55381a09c704e9f177ebb
   languageName: node
   linkType: hard
 
