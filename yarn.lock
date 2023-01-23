@@ -2090,13 +2090,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/env@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@fastify/env@npm:4.1.0"
+"@fastify/env@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@fastify/env@npm:4.2.0"
   dependencies:
     env-schema: ^5.0.0
     fastify-plugin: ^4.0.0
-  checksum: c5bcfdb4d0a76ce1797aeb1676f12151da72ad5bf0268c6815e0f224ae819693aababd7ecc424ce205fdb8720590a80a867e442f30ae04872ca7ea911f73d1bc
+  checksum: c681a0dfbdc1574154101b68d59e3aacc7f88b39cd52b520ee43449a8cadb31b494ea248c796b112703516d0e1c9df74c1e964dc00301263acbf38f230fa3552
   languageName: node
   linkType: hard
 
@@ -16472,7 +16472,7 @@ __metadata:
   dependencies:
     "@fastify/cookie": ^8.3.0
     "@fastify/cors": ^8.2.0
-    "@fastify/env": ^4.1.0
+    "@fastify/env": ^4.2.0
     "@fastify/jwt": ^6.5.0
     "@fastify/sensible": ^5.2.0
     "@fastify/swagger": ^8.2.0
