@@ -30,12 +30,19 @@ export const Popup = ({
   useLayoutEffect(() => {
     const anchorCurrent = anchorElement.current;
 
-    if (anchorCurrent) {
-      const anchorRect = anchorCurrent.getBoundingClientRect();
+    if (!anchorCurrent) return;
 
+    const setPosition = () => {
+      const anchorRect = anchorCurrent.getBoundingClientRect();
       setLeft(anchorRect.left);
       setTop(anchorRect.top + anchorRect.height);
-    }
+    };
+    setPosition();
+
+    window.addEventListener('resize', setPosition);
+    return () => {
+      window.removeEventListener('resize', setPosition);
+    };
   }, [anchorElement]);
 
   return (
