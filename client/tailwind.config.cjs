@@ -129,6 +129,7 @@ module.exports = {
       ...rem(24),
       ...rem(30),
       ...rem(32),
+      ...rem(38),
       ...rem(40),
       ...rem(48),
       ...rem(50),

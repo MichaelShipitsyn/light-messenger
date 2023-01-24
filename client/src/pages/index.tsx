@@ -21,6 +21,10 @@ export const routesMap = [
     path: '/profile',
     route: routes.profile,
   },
+  {
+    path: '/:dialogId',
+    route: [routes.home, routes.dialog],
+  },
 ];
 
 export const Pages = createRoutesView({

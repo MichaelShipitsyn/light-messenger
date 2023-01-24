@@ -12,6 +12,7 @@ export const routes = {
   signIn: createRoute(),
   home: createRoute(),
   profile: createRoute(),
+  dialog: createRoute<{ dialogId: string }>(),
 };
 
 export function chainAuthorized<Params extends RouteParams>(

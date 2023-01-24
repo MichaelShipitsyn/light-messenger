@@ -1,7 +1,7 @@
 import { combine } from 'effector';
 import { list, variant } from '@effector/reflect';
-import { createRouteView } from 'atomic-router-react';
-import { authorizedHome } from '@lm-client/shared/routes';
+import { createRouteView, Link } from 'atomic-router-react';
+import { authorizedHome, routes } from '@lm-client/shared/routes';
 import { Header } from '@lm-client/widgets/header';
 import { DialogCard } from '@lm-client/entities/dialog';
 import { Dialog } from '@lm-client/shared/types';
@@ -43,13 +43,18 @@ const DialogList = list<
   }
 >({
   view: ({ id, lastMessage, currentViewerId, participants }) => (
-    <li className="px-15 py-10 transition-colors hover:bg-blue">
-      <DialogCard
-        id={id}
-        lastMessage={lastMessage}
-        currentViewerId={currentViewerId}
-        participants={participants}
-      />
+    <li>
+      <Link
+        to={routes.dialog}
+        params={{ dialogId: id.toString() }}
+        className="block px-15 py-10 transition-colors hover:bg-blue"
+      >
+        <DialogCard
+          lastMessage={lastMessage}
+          currentViewerId={currentViewerId}
+          participants={participants}
+        />
+      </Link>
     </li>
   ),
   source: dialogsModel.$dialogs,
@@ -77,7 +82,7 @@ const PageContent = variant({
     }
   ),
   cases: {
-    loading: () => <div>Loading...</div>,
+    loading: () => <p>Loading...</p>,
     empty: () => <p>No dialogs....</p>,
     ready: DialogList,
   },
