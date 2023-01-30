@@ -7895,7 +7895,7 @@ __metadata:
     clsx: ^1.2.1
     composable-forms: ^0.1.19
     dayjs: ^1.11.7
-    effector: ^22.4.0
+    effector: ^22.5.0
     effector-openapi-preset: ^0.3.3
     effector-react: ^22.4.0
     effector-storage: ^5.0.1
@@ -9095,10 +9095,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"effector@npm:^22.4.0":
-  version: 22.4.0
-  resolution: "effector@npm:22.4.0"
-  checksum: 87d3a9df2d9378d1ee88aeb585eb26db29c2c941a04d5a105f1b64f28a4129824bfc7ee5bd45ee4a4f7c8f6b54627c95de947f18badf1297ab29b9a11de14b32
+"effector@npm:^22.5.0":
+  version: 22.5.0
+  resolution: "effector@npm:22.5.0"
+  checksum: d89d6005e38a49826023298849a8838ae7c753627ba729fec0c21ddef4ba90ec682b0401ea7b7c51ee00eb6ea00c2c0bf21c162a1eb840bc775c10797f6ed534
   languageName: node
   linkType: hard
 
