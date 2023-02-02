@@ -1,32 +1,32 @@
 import { combine } from 'effector';
 import { list, variant } from '@effector/reflect';
-import { createRouteView, Link } from 'atomic-router-react';
-import { authorizedHome, routes } from '@lm-client/shared/routes';
+import { createRoutesView, createRouteView, Link } from 'atomic-router-react';
+import { authorizedRoot, routes } from '@lm-client/shared/routes';
 import { Header } from '@lm-client/widgets/header';
 import { DialogCard } from '@lm-client/entities/dialog';
 import { Dialog } from '@lm-client/shared/types';
 import * as dialogsModel from '@lm-client/entities/dialog';
 import * as viewerModel from '@lm-client/entities/viewer';
+import { useUnit } from 'effector-react';
 
-dialogsModel.$dialogs.watch(console.log);
+// dialogsModel.$dialogs.watch(console.log);
 
-export const HomePage = createRouteView({
-  route: authorizedHome,
+export const RootPage = createRouteView({
+  route: authorizedRoot,
   view() {
     return (
       <>
         <Header />
-        {/* <Link to={routes.signIn} className="text-14 text-blue hover:underline">
-          Auth page
-        </Link> */}
-        <div className="grid  grid-flow-row grid-cols-7">
+        <div className="grid grid-flow-row grid-cols-7">
           <div className="col-span-2 border-r-2 border-r-blue">
             {/* Add search bar and then change calc */}
             <ul className="h-[calc(100vh-2rem-5rem)] overflow-auto py-15">
-              <PageContent />
+              <RootPageContent />
             </ul>
           </div>
-          <div className="col-span-5">Placeholder</div>
+          <div className="col-span-5">
+            <RootPageRoutes />
+          </div>
         </div>
       </>
     );
@@ -34,6 +34,23 @@ export const HomePage = createRouteView({
   otherwise() {
     return <div>Loading...</div>;
   },
+});
+
+const RootPageRoutes = createRoutesView({
+  routes: [
+    {
+      route: routes.app.profile,
+      view: () => <p>Profile</p>,
+    },
+    {
+      route: routes.app.dialog,
+      view: () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const { dialogId } = useUnit(routes.app.dialog.$params);
+        return <p>Dialog {dialogId}</p>;
+      },
+    },
+  ],
 });
 
 const DialogList = list<
@@ -45,7 +62,7 @@ const DialogList = list<
   view: ({ id, lastMessage, currentViewerId, participants }) => (
     <li>
       <Link
-        to={routes.dialog}
+        to={routes.app.dialog}
         params={{ dialogId: id.toString() }}
         className="block px-15 py-10 transition-colors hover:bg-blue"
       >
@@ -69,7 +86,7 @@ const DialogList = list<
   getKey: (dialog) => dialog.id.toString(),
 });
 
-const PageContent = variant({
+const RootPageContent = variant({
   source: combine(
     {
       status: dialogsModel.$dialogsStatus,

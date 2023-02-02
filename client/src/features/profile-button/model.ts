@@ -6,5 +6,5 @@ export const profileButtonClicked = createEvent();
 
 redirect({
   clock: profileButtonClicked,
-  route: routes.profile,
+  route: routes.app.profile,
 });

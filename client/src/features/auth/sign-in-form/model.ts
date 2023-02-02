@@ -77,5 +77,5 @@ sample({
 
 redirect({
   clock: signInFx.doneData,
-  route: routes.home,
+  route: routes.app.root,
 });
