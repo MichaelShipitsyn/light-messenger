@@ -27,6 +27,12 @@ export const signUpHandler = async (
       email,
       phoneNumber,
       password: hashedPassword,
+      profile: {
+        create: {
+          avatar: '',
+          bio: '',
+        },
+      },
     },
     select: {
       id: true,
@@ -38,21 +44,12 @@ export const signUpHandler = async (
 
   const hashedRt = await argon.hash(refreshToken);
 
-  await Promise.all([
-    request.prisma.refreshToken.create({
-      data: {
-        userId: userId,
-        hashedRt,
-      },
-    }),
-    request.prisma.profile.create({
-      data: {
-        userId: userId,
-        bio: '',
-        avatar: '',
-      },
-    }),
-  ]);
+  await request.prisma.refreshToken.create({
+    data: {
+      userId: userId,
+      hashedRt,
+    },
+  });
 
   const createdUser = await request.prisma.user.findUnique({
     where: { id: userId },

@@ -11,39 +11,26 @@ export const createDialog = async (
 ) => {
   const currentUserId = request.user.id;
   const { recipientId, message } = request.body;
-  const { id: dialogId } = await request.prisma.dialog.create({ data: {} });
-
-  const [, createdMessage] = await Promise.all([
-    request.prisma.participant.createMany({
-      data: [
-        {
-          dialogId,
-          userId: currentUserId,
+  const { id: dialogId, messages } = await request.prisma.dialog.create({
+    data: {
+      participants: {
+        createMany: {
+          data: [{ userId: currentUserId }, { userId: recipientId }],
         },
-        {
-          dialogId,
-          userId: recipientId,
-        },
-      ],
-    }),
-    request.prisma.message.create({
-      data: {
-        dialogId,
-        text: message,
-        creatorId: currentUserId,
       },
-    }),
-  ]);
-
-  await request.prisma.dialog.update({
-    where: { id: dialogId },
-    data: { messageId: createdMessage.id },
+      messages: {
+        create: {
+          text: message,
+          creatorId: currentUserId,
+        },
+      },
+    },
+    select: { messages: true, id: true },
   });
 
-  const createdDialog = await request.prisma.dialog.findUnique({
-    where: {
-      id: dialogId,
-    },
+  const createdDialog = await request.prisma.dialog.update({
+    where: { id: dialogId },
+    data: { messageId: messages[0].id },
     include: {
       participants: { include: { user: { include: { profile: true } } } },
       messages: true,
