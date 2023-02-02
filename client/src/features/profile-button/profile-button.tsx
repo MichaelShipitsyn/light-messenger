@@ -1,14 +1,17 @@
 import { useUnit } from 'effector-react';
 import * as model from './model';
 
-export const ProfileButton = () => {
+type ProfileButtonProps = {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+};
+
+export const ProfileButton = ({ onClick }: ProfileButtonProps) => {
   const profileButtonHandler = useUnit(model.profileButtonClicked);
 
   return (
     <button
-      onClick={profileButtonHandler}
+      onClick={(event) => (profileButtonHandler(), onClick?.(event))}
       className="flex items-center gap-10 text-14"
-      key="profileButton"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

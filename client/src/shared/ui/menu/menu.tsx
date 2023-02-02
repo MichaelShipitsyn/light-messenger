@@ -52,7 +52,7 @@ export const Menu = ({ menu, trigger, anchorElement }: MenuProps) => {
               >
                 {cloneElement(menuItem, {
                   onClick: () => {
-                    menuItem.props.onCLick?.();
+                    menuItem.props.onClick?.();
                     handleCloseMenu();
                   },
                 })}

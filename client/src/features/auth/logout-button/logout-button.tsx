@@ -1,12 +1,16 @@
 import { useUnit } from 'effector-react';
 import * as model from './model';
 
-export const LogoutButton = () => {
+type LogoutButtonProps = {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+};
+
+export const LogoutButton = ({ onClick }: LogoutButtonProps) => {
   const logoutHandler = useUnit(model.buttonClicked);
 
   return (
     <button
-      onClick={logoutHandler}
+      onClick={(event) => (logoutHandler(), onClick?.(event))}
       className="flex items-center gap-10 text-14"
     >
       <svg
