@@ -101,5 +101,5 @@ sample({
 
 redirect({
   clock: signUpFx.doneData,
-  route: routes.home,
+  route: routes.app.root,
 });
