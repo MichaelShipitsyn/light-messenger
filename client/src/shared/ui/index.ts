@@ -7,3 +7,4 @@ export * from './portal';
 export * from './popup';
 export * from './menu';
 export * from './avatar';
+export * from './modal';

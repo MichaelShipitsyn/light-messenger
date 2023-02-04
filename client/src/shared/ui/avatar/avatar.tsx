@@ -21,7 +21,7 @@ type SecondaryAvatarProps = BaseAvatarProps & {
 type AvatarProps = PrimaryAvatarProps | SecondaryAvatarProps;
 
 const sizes = {
-  lg: '',
+  lg: 'h-60 w-60 text-24',
   md: 'h-48 w-48',
   sm: 'h-40 w-40',
   xs: 'h-32 w-32',

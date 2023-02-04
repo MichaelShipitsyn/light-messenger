@@ -133,6 +133,7 @@ module.exports = {
       ...rem(40),
       ...rem(48),
       ...rem(50),
+      ...rem(58),
       ...rem(60),
       ...rem(70),
       ...rem(75),

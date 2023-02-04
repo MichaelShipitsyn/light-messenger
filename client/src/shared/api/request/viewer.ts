@@ -1,5 +1,5 @@
 import { createEffect } from 'effector';
-import type { ApiError, User } from '@lm-client/shared/types';
+import type { ApiError, User, UserProfile } from '@lm-client/shared/types';
 import { handledRequestFx } from './base';
 
 export const getViewerFx = createEffect<void, User, ApiError>(
@@ -8,4 +8,27 @@ export const getViewerFx = createEffect<void, User, ApiError>(
       path: new URL('user/me', import.meta.env.VITE_BASE_API_URL).toString(),
       method: 'GET',
     }) as Promise<User>
+);
+
+export const editProfileFx = createEffect<
+  {
+    avatar?: string;
+    bio?: string;
+  },
+  UserProfile,
+  ApiError
+>(
+  (profile) =>
+    handledRequestFx({
+      path: new URL(
+        'user/profile',
+        import.meta.env.VITE_BASE_API_URL
+      ).toString(),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: profile,
+    }) as Promise<UserProfile>
 );
