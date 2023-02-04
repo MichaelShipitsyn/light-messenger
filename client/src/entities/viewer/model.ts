@@ -1,4 +1,6 @@
 import { createEvent, createStore, sample } from 'effector';
+import { chainAuthorized, routes } from '@lm-client/shared/routes';
+import { chainRoute } from 'atomic-router';
 import * as api from '@lm-client/shared/api';
 import type { User } from '@lm-client/shared/types';
 
@@ -14,4 +16,12 @@ sample({
 sample({
   clock: api.getViewerFx.doneData,
   target: $viewer,
+});
+
+export const viewerLoadedRoute = chainRoute({
+  route: chainAuthorized(routes.app.root),
+  beforeOpen: {
+    effect: api.getViewerFx,
+    mapParams: (params) => params,
+  },
 });

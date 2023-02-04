@@ -43,7 +43,6 @@ export const createMessage = async (
   });
 
   if (recipientId) {
-    console.log(createdMessage, recipientId);
     request.io
       .to(recipientId.toString())
       .emit('SERVER:CREATE_MESSAGE', JSON.stringify(createdMessage));

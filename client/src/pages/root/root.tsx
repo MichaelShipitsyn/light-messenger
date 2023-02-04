@@ -2,7 +2,8 @@ import { combine } from 'effector';
 import { useUnit } from 'effector-react';
 import { list, variant } from '@effector/reflect';
 import { createRoutesView, createRouteView, Link } from 'atomic-router-react';
-import { authorizedRoot, routes } from '@lm-client/shared/routes';
+import { routes } from '@lm-client/shared/routes';
+import { viewerLoadedRoute } from './model';
 import { Header } from '@lm-client/widgets/header';
 import { DialogCard } from '@lm-client/entities/dialog';
 import { Dialog } from '@lm-client/shared/types';
@@ -11,7 +12,7 @@ import * as viewerModel from '@lm-client/entities/viewer';
 import { ProfilePage } from './profile';
 
 export const RootPage = createRouteView({
-  route: authorizedRoot,
+  route: viewerLoadedRoute,
   view() {
     return (
       <>

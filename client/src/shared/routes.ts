@@ -40,5 +40,3 @@ export const chainAuthorized = <Params extends RouteParams>(
     openOn: [alreadyAuthorized, api.tokenReceived],
   });
 };
-
-export const authorizedRoot = chainAuthorized(routes.app.root);
