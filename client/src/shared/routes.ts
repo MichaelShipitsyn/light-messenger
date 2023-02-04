@@ -4,8 +4,10 @@ import {
   redirect,
   RouteInstance,
   RouteParams,
+  RouteParamsAndQuery,
 } from 'atomic-router';
 import * as api from '@lm-client/shared/api';
+import { createEvent, sample } from 'effector';
 
 export const routes = {
   signUp: createRoute(),
@@ -20,6 +22,13 @@ export const routes = {
 export const chainAuthorized = <Params extends RouteParams>(
   route: RouteInstance<Params>
 ) => {
+  const sessionCheckStarted = createEvent<RouteParamsAndQuery<Params>>();
+
+  const alreadyAuthorized = sample({
+    clock: sessionCheckStarted,
+    filter: api.$isAuthorized,
+  });
+
   redirect({
     clock: api.getViewerFx.failData,
     route: routes.signIn,
@@ -27,12 +36,8 @@ export const chainAuthorized = <Params extends RouteParams>(
 
   return chainRoute({
     route,
-    beforeOpen: {
-      effect: api.getViewerFx,
-      mapParams: (params) => params,
-    },
-    openOn: api.getViewerFx.doneData,
-    cancelOn: api.getViewerFx.failData,
+    beforeOpen: sessionCheckStarted,
+    openOn: [alreadyAuthorized, api.tokenReceived],
   });
 };
 

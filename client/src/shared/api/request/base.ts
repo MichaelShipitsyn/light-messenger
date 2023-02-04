@@ -1,4 +1,10 @@
-import { attach, createEffect, createStore, sample } from 'effector';
+import {
+  attach,
+  createEffect,
+  createEvent,
+  createStore,
+  sample,
+} from 'effector';
 import { persist } from 'effector-storage/local';
 import type { ApiError } from '@lm-client/shared/types';
 export interface Request {
@@ -10,7 +16,11 @@ export interface Request {
   credentials?: 'include' | 'omit' | 'same-origin';
 }
 
+export const tokenReceived = createEvent();
+export const tokenErased = createEvent();
+
 export const $token = createStore('');
+export const $isAuthorized = $token.map(Boolean);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isApiError = (err: any): err is ApiError => {
@@ -125,7 +135,7 @@ export const handledRequestFx = createEffect<
 sample({
   clock: updateTokenFx.doneData,
   fn: (response) => response.token,
-  target: $token,
+  target: [$token, tokenReceived],
 });
 
 persist({

@@ -3,7 +3,6 @@ import * as api from '@lm-client/shared/api';
 import type { User } from '@lm-client/shared/types';
 
 export const $viewer = createStore<User | null>(null);
-export const $isAuthenticated = $viewer.map(Boolean);
 
 export const viewerLoggedIn = createEvent<User>();
 

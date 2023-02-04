@@ -22,3 +22,8 @@ reset({
   clock: api.logoutFx.doneData,
   target: api.$token,
 });
+
+sample({
+  clock: api.logoutFx.doneData,
+  target: api.tokenErased,
+});
