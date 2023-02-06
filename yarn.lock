@@ -8348,6 +8348,7 @@ __metadata:
     composable-forms: ^0.1.19
     dayjs: ^1.11.7
     effector: ^22.5.0
+    effector-hotkey: ^0.2.3
     effector-openapi-preset: ^0.3.3
     effector-react: ^22.4.0
     effector-storage: ^5.0.1
@@ -9524,6 +9525,15 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 1b4cac778d64ce3b582a7e26b218afe07e207a0f9bfe13cc7395a6d307849cfe361e65033c3251e00c27dd060cab43014c2d6b2647676135e18b77d2d05b3f4f
+  languageName: node
+  linkType: hard
+
+"effector-hotkey@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "effector-hotkey@npm:0.2.3"
+  peerDependencies:
+    effector: ^22
+  checksum: 184654dda2eaefd526cc09fcc4a25e16f36e2d46096cee815d59d7b3f269eabbda3283d6fd6c7d3a17b88c3ef8b5f98ced4320fa925f7a063e5f3e37141ba0c8
   languageName: node
   linkType: hard
 
