@@ -12,11 +12,12 @@ import {
   editMessageSchema,
   getMessageSchema,
   getMessagesSchema,
+  MessageQueryString,
 } from './message.schema';
 import type { CreateMessageBody } from './message.schema';
 
 export const messageController = async (server: FastifyInstance) => {
-  server.post<{ Body: CreateMessageBody }>(
+  server.post<{ Body: CreateMessageBody; Querystring: MessageQueryString }>(
     '/create',
     {
       onRequest: [server.authenticate],
@@ -43,7 +44,11 @@ export const messageController = async (server: FastifyInstance) => {
     getMessage,
   );
 
-  server.put<{ Body: { text: string }; Params: { id: number } }>(
+  server.put<{
+    Body: { text: string };
+    Params: { id: number };
+    Querystring: MessageQueryString;
+  }>(
     '/:id',
     {
       onRequest: [server.authenticate],
@@ -52,7 +57,7 @@ export const messageController = async (server: FastifyInstance) => {
     editMessage,
   );
 
-  server.delete<{ Params: { id: number } }>(
+  server.delete<{ Params: { id: number }; Querystring: MessageQueryString }>(
     '/:id',
     {
       onRequest: [server.authenticate],

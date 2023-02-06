@@ -20,11 +20,73 @@ export const createMessageSchema = {
       type: 'object',
       properties: {
         id: { type: 'number' },
-        text: { type: 'string' },
-        creatorId: { type: 'number' },
-        dialogId: { type: 'number' },
         createdAt: { type: 'string' },
         updatedAt: { type: 'string' },
+        messages: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'number' },
+              text: { type: 'string' },
+              creatorId: { type: 'number' },
+              dialogId: { type: 'number' },
+              createdAt: { type: 'string' },
+              updatedAt: { type: 'string' },
+            },
+          },
+        },
+        participants: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              userId: { type: 'number' },
+              dialogId: { type: 'number' },
+              user: {
+                type: 'object',
+                properties: {
+                  email: { type: 'string' },
+                  phoneNumber: { type: 'string' },
+                  username: { type: 'string' },
+                  createdAt: { type: 'string' },
+                  updatedAt: { type: 'string' },
+                  profile: {
+                    type: ['object', 'null'],
+                    properties: {
+                      avatar: { type: 'string' },
+                      bio: { type: 'string' },
+                      createdAt: { type: 'string' },
+                      updatedAt: { type: 'string' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        lastMessage: {
+          type: ['object', 'null'],
+          properties: {
+            id: { type: 'number' },
+            text: { type: 'string' },
+            createdAt: { type: 'string' },
+            updatedAt: { type: 'string' },
+            creator: {
+              type: 'object',
+              properties: {
+                id: { type: 'number' },
+                username: { type: 'string' },
+                profile: {
+                  type: ['object', 'null'],
+                  properties: {
+                    avatar: { type: 'string' },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     },
   },
@@ -132,5 +194,7 @@ export const deleteMessageSchema = {
 };
 
 export type MessageQueryString = { dialogId: number };
-export type CreateMessageBody = FromSchema<typeof createMessageSchema['body']>;
-export type EditMessageBody = FromSchema<typeof editMessageSchema['body']>;
+export type CreateMessageBody = FromSchema<
+  (typeof createMessageSchema)['body']
+>;
+export type EditMessageBody = FromSchema<(typeof editMessageSchema)['body']>;

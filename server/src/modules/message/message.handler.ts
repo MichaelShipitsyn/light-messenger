@@ -29,26 +29,34 @@ export const createMessage = async (
     )?.userId;
   }
 
-  const createdMessage = await request.prisma.message.create({
+  const { id: createdMessageId } = await request.prisma.message.create({
     data: {
       text,
       dialogId,
       creatorId: currentUserId,
     },
+    select: {
+      id: true,
+    },
   });
 
-  await request.prisma.dialog.update({
+  const updatedDialog = await request.prisma.dialog.update({
     where: { id: dialogId },
-    data: { messageId: createdMessage.id },
+    data: { messageId: createdMessageId },
+    include: {
+      participants: { include: { user: { include: { profile: true } } } },
+      messages: true,
+      lastMessage: { include: { creator: { include: { profile: true } } } },
+    },
   });
 
   if (recipientId) {
     request.io
       .to(recipientId.toString())
-      .emit('SERVER:CREATE_MESSAGE', JSON.stringify(createdMessage));
+      .emit('SERVER:CREATE_MESSAGE', JSON.stringify(updatedDialog));
   }
 
-  return reply.status(201).send(createdMessage);
+  return reply.status(201).send(updatedDialog);
 };
 
 export const getMessages = async (
