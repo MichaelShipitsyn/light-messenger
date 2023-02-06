@@ -1,14 +1,14 @@
 import { combine } from 'effector';
-import { useUnit } from 'effector-react';
 import { list, variant } from '@effector/reflect';
 import { createRoutesView, createRouteView, Link } from 'atomic-router-react';
 import { routes } from '@lm-client/shared/routes';
 import { Header } from '@lm-client/widgets/header';
 import { DialogCard } from '@lm-client/entities/dialog';
 import { Dialog } from '@lm-client/shared/types';
+import { ProfilePage } from './profile';
+import { DialogPage } from './dialog';
 import * as dialogsModel from '@lm-client/entities/dialog';
 import * as viewerModel from '@lm-client/entities/viewer';
-import { ProfilePage } from './profile';
 
 export const RootPage = createRouteView({
   route: viewerModel.viewerLoadedRoute,
@@ -43,11 +43,7 @@ const RootPageRoutes = createRoutesView({
     },
     {
       route: routes.app.dialog,
-      view: () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const { dialogId } = useUnit(routes.app.dialog.$params);
-        return <p>Dialog {dialogId}</p>;
-      },
+      view: DialogPage,
     },
   ],
 });

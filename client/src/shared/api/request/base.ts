@@ -6,7 +6,9 @@ import {
   sample,
 } from 'effector';
 import { persist } from 'effector-storage/local';
+import { waitFor } from '@lm-client/shared/libs';
 import type { ApiError } from '@lm-client/shared/types';
+
 export interface Request {
   path: string;
   method: 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH';
@@ -42,7 +44,7 @@ const baseRequestFx = createEffect<Request, unknown>(
       if (error.statusCode) {
         throw error;
       }
-      throw Error(String(res.status));
+      throw Error(res.status.toString());
     }
 
     return res.json();
@@ -113,6 +115,7 @@ export const handledRequestFx = createEffect<
         }
       } else if (isApiError(error)) {
         if (error.statusCode === 401 && tries > 0) {
+          await waitFor(3000);
           await updateTokenFx();
           return await handledRequestFx({
             path,

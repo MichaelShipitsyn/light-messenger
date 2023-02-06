@@ -36,3 +36,7 @@ export const formatTime = (time: string) => {
 
   return formattedTime.format('DD.MM.YYYY');
 };
+
+export const formatTimeMessage = (time: string) => {
+  return dayjs(time).format('hh:mm A');
+};
