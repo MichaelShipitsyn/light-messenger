@@ -8363,7 +8363,7 @@ __metadata:
     joi: ^17.7.0
     jsdom: ^20.0.1
     openapi: ^1.0.0
-    patronum: ^1.12.3
+    patronum: ^1.14.2
     postcss: ^8.4.20
     prettier: ^2.8.3
     prettier-plugin-tailwindcss: ^0.1.13
@@ -15337,12 +15337,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"patronum@npm:^1.12.3":
-  version: 1.12.3
-  resolution: "patronum@npm:1.12.3"
+"patronum@npm:^1.14.2":
+  version: 1.14.2
+  resolution: "patronum@npm:1.14.2"
   peerDependencies:
     effector: ^22.1.2
-  checksum: 1abb1d4c80915f855bcbf794ab82ad497c230505bc0caec98a324d216942638a13cf28aea76178ea7dd63c09ea8e403998365d12cb697d036851225cc591b2ae
+  checksum: 60f816741adc78cae324cb253503260e14d568252c55198d8d431b344518c365e210951e4c330756612fd1276a64e75c2af358c113305363d2aacf626880e027
   languageName: node
   linkType: hard
 
