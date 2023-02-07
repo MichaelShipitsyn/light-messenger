@@ -7,11 +7,11 @@ import { UserCard } from '@lm-client/entities/user';
 import { Dialog, User } from '@lm-client/shared/types';
 import { ProfilePage } from './profile';
 import { DialogPage } from './dialog';
+import { CreateDialogPage } from './create-dialog';
 import { SearchUser } from '@lm-client/features/search-user';
 import * as dialogsModel from '@lm-client/entities/dialog';
 import * as viewerModel from '@lm-client/entities/viewer';
 import * as userModel from '@lm-client/entities/user';
-import { CreateDialog } from '@lm-client/features/create-dialog';
 
 export const RootPage = createRouteView({
   route: viewerModel.viewerLoadedRoute,
@@ -47,7 +47,7 @@ const RootPageRoutes = createRoutesView({
     },
     {
       route: routes.app.createDialog,
-      view: CreateDialog,
+      view: CreateDialogPage,
     },
     {
       route: routes.app.dialog,
@@ -94,6 +94,7 @@ const UsersList = list<User, Pick<User, 'id' | 'username'>>({
     <li>
       <Link
         to={routes.app.createDialog}
+        query={{ recipientId: id }}
         className="block px-15 py-10 transition-colors hover:bg-blue"
       >
         <UserCard id={id} username={username} />
