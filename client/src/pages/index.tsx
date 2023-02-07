@@ -18,6 +18,10 @@ export const routesMap = [
     route: [routes.app.root, routes.app.profile],
   },
   {
+    path: '/create-dialog',
+    route: [routes.app.root, routes.app.createDialog],
+  },
+  {
     path: '/:dialogId',
     route: [routes.app.root, routes.app.dialog],
   },

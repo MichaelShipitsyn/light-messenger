@@ -1,6 +1,12 @@
 import type { FastifyInstance } from 'fastify';
-import { editProfile, getMe, getUsers } from './user.handler';
-import { EditProfileBody, getMeSchema, getUsersSchema } from './user.schema';
+import { editProfile, getMe, getUsers, searchUser } from './user.handler';
+import {
+  EditProfileBody,
+  getMeSchema,
+  getUsersSchema,
+  SearchUserQuerystring,
+  searchUserSchema,
+} from './user.schema';
 
 export const userController = async (server: FastifyInstance) => {
   server.get(
@@ -13,6 +19,15 @@ export const userController = async (server: FastifyInstance) => {
     '/all',
     { onRequest: [server.authenticate], schema: getUsersSchema },
     getUsers,
+  );
+
+  server.get<{ Querystring: SearchUserQuerystring }>(
+    '/search',
+    {
+      onRequest: [server.authenticate],
+      schema: searchUserSchema,
+    },
+    searchUser,
   );
 
   server.post<{ Body: EditProfileBody }>(

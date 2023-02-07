@@ -32,3 +32,20 @@ export const editProfileFx = createEffect<
       body: profile,
     }) as Promise<UserProfile>
 );
+
+export const searchUsersFx = createEffect<string, User[], ApiError>(
+  (username) => {
+    const url = new URL('user/search', import.meta.env.VITE_BASE_API_URL);
+
+    url.searchParams.set('username', username);
+
+    return handledRequestFx({
+      path: url.toString(),
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    }) as Promise<User[]>;
+  }
+);

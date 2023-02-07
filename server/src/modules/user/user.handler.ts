@@ -1,5 +1,5 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import { EditProfileBody } from './user.schema';
+import { EditProfileBody, SearchUserQuerystring } from './user.schema';
 
 export const getUsers = async (
   request: FastifyRequest,
@@ -76,4 +76,26 @@ export const editProfile = async (
   });
 
   return reply.status(201).send(profile);
+};
+
+export const searchUser = async (
+  request: FastifyRequest<{ Querystring: SearchUserQuerystring }>,
+  reply: FastifyReply,
+) => {
+  const username = request.query.username;
+  const currentUserId = request.user.id;
+
+  const users = await request.prisma.user.findMany({
+    where: {
+      username: {
+        contains: username,
+        mode: 'insensitive',
+      },
+      NOT: {
+        id: currentUserId,
+      },
+    },
+  });
+
+  reply.status(200).send(users);
 };

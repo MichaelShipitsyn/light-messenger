@@ -23,19 +23,25 @@ export const tokenErased = createEvent();
 
 export const $token = createStore('');
 export const $isAuthorized = $token.map(Boolean);
+const $signal = createStore(new AbortController());
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isApiError = (err: any): err is ApiError => {
   return err.statusCode !== undefined;
 };
 
-const baseRequestFx = createEffect<Request, unknown>(
-  async ({ path, method, headers, body, credentials }) => {
+export const baseRequestFx = attach({
+  source: $signal,
+  async effect(
+    { signal },
+    { path, method, headers, body, credentials }: Request
+  ) {
     const res = await fetch(path, {
       method,
       headers,
       credentials,
       ...(Boolean(body) && { body: JSON.stringify(body) }),
+      signal,
     });
 
     if (!res.ok) {
@@ -48,8 +54,17 @@ const baseRequestFx = createEffect<Request, unknown>(
     }
 
     return res.json();
-  }
-);
+  },
+});
+
+export const abortFx = attach({
+  source: $signal,
+  effect(ctrl) {
+    ctrl.abort();
+  },
+});
+
+$signal.on(abortFx.done, () => new AbortController());
 
 const authenticateRequestFx = attach({
   source: $token,
@@ -88,7 +103,7 @@ export const handledRequestFx = createEffect<
     headers,
     body,
     credentials,
-    tries = 5,
+    tries = 3,
   }): Promise<unknown> => {
     try {
       return await authenticateRequestFx({
@@ -99,21 +114,8 @@ export const handledRequestFx = createEffect<
         credentials,
       });
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message.includes('401') && tries > 0) {
-          await updateTokenFx();
-          return await handledRequestFx({
-            path,
-            method,
-            headers,
-            body,
-            credentials,
-            tries: tries - 1,
-          });
-        } else {
-          throw error;
-        }
-      } else if (isApiError(error)) {
+      await abortFx();
+      if (isApiError(error)) {
         if (error.statusCode === 401 && tries > 0) {
           await waitFor(3000);
           await updateTokenFx();
@@ -128,9 +130,8 @@ export const handledRequestFx = createEffect<
         } else {
           throw error;
         }
-      } else {
-        throw error;
       }
+      throw error;
     }
   }
 );

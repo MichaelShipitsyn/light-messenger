@@ -161,4 +161,39 @@ export const editProfileSchema = {
   },
 } as const;
 
-export type EditProfileBody = FromSchema<typeof editProfileSchema['body']>;
+export const searchUserSchema = {
+  querystring: {
+    type: 'object',
+    properties: {
+      username: { type: 'string' },
+    },
+  },
+  response: {
+    200: {
+      description: 'Success response',
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id: { type: 'number', examples: [1] },
+          username: { type: 'string', examples: ['user1'] },
+          email: { type: 'string', examples: ['user1@example.com'] },
+          phoneNumber: { type: 'string', examples: ['87777777777'] },
+          profile: {
+            type: ['object', 'null'],
+            properties: {
+              avatar: {
+                type: 'string',
+                examples: ['http://localhost:8080/profile/avatar.jpg'],
+              },
+              bio: { type: 'string', examples: ['Hello world!'] },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+export type SearchUserQuerystring = { username: string };
+export type EditProfileBody = FromSchema<(typeof editProfileSchema)['body']>;
