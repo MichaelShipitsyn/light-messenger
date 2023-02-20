@@ -8305,7 +8305,7 @@ __metadata:
     eslint-plugin-storybook: ^0.6.10
     history: ^5.3.0
     joi: ^17.7.1
-    jsdom: ^20.0.1
+    jsdom: ^21.1.0
     openapi: ^1.0.0
     patronum: ^1.14.2
     postcss: ^8.4.20
@@ -9009,10 +9009,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decimal.js@npm:^10.4.1":
-  version: 10.4.2
-  resolution: "decimal.js@npm:10.4.2"
-  checksum: 536cd6816a3197f2e1aa3da4860856cb5a2db73f6fafe8cb3b924ccc63f9b7d78296acc13dccbd419bd958ccc6357921fb15467f883b37cab04bfba7044cada2
+"decimal.js@npm:^10.4.2":
+  version: 10.4.3
+  resolution: "decimal.js@npm:10.4.3"
+  checksum: 796404dcfa9d1dbfdc48870229d57f788b48c21c603c3f6554a1c17c10195fc1024de338b0cf9e1efe0c7c167eeb18f04548979bcc5fdfabebb7cc0ae3287bae
   languageName: node
   linkType: hard
 
@@ -12963,17 +12963,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:^20.0.1":
-  version: 20.0.1
-  resolution: "jsdom@npm:20.0.1"
+"jsdom@npm:^21.1.0":
+  version: 21.1.0
+  resolution: "jsdom@npm:21.1.0"
   dependencies:
     abab: ^2.0.6
-    acorn: ^8.8.0
+    acorn: ^8.8.1
     acorn-globals: ^7.0.0
     cssom: ^0.5.0
     cssstyle: ^2.3.0
     data-urls: ^3.0.2
-    decimal.js: ^10.4.1
+    decimal.js: ^10.4.2
     domexception: ^4.0.0
     escodegen: ^2.0.0
     form-data: ^4.0.0
@@ -12986,19 +12986,19 @@ __metadata:
     saxes: ^6.0.0
     symbol-tree: ^3.2.4
     tough-cookie: ^4.1.2
-    w3c-xmlserializer: ^3.0.0
+    w3c-xmlserializer: ^4.0.0
     webidl-conversions: ^7.0.0
     whatwg-encoding: ^2.0.0
     whatwg-mimetype: ^3.0.0
     whatwg-url: ^11.0.0
-    ws: ^8.9.0
+    ws: ^8.11.0
     xml-name-validator: ^4.0.0
   peerDependencies:
     canvas: ^2.5.0
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: 9fc0b66a866f58a28e95f5a39b167ea663dc01c9754a019c356cc517d27ff0216055f37ace69e0f4414c51084adca8d5ec71c1e6faee3b8df0941a494167c3a0
+  checksum: 2c89c72a6f399184ffc8de30bbdd86283086dbd72bb3a40667102d3f12af141c7517ffb78150a3bb6883a654e8c7d0266c3328d1c387a2b9a1fd0729dc537954
   languageName: node
   linkType: hard
 
@@ -19143,12 +19143,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"w3c-xmlserializer@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "w3c-xmlserializer@npm:3.0.0"
+"w3c-xmlserializer@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "w3c-xmlserializer@npm:4.0.0"
   dependencies:
     xml-name-validator: ^4.0.0
-  checksum: 0af8589942eeb11c9fe29eb31a1a09f3d5dd136aea53a9848dfbabff79ac0dd26fe13eb54d330d5555fe27bb50b28dca0715e09f9cc2bfa7670ccc8b7f919ca2
+  checksum: eba070e78deb408ae8defa4d36b429f084b2b47a4741c4a9be3f27a0a3d1845e277e3072b04391a138f7e43776842627d1334e448ff13ff90ad9fb1214ee7091
   languageName: node
   linkType: hard
 
@@ -19527,7 +19527,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.2.3, ws@npm:^8.9.0":
+"ws@npm:^8.11.0":
+  version: 8.12.1
+  resolution: "ws@npm:8.12.1"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 97301c1c4d838fc81bd413f370f75c12aabe44527b31323b761eab3043a9ecb7e32ffd668548382c9a6a5ad3a1c3a9249608e8338e6b939f2f9540f1e21970b5
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.2.3":
   version: 8.9.0
   resolution: "ws@npm:8.9.0"
   peerDependencies:
