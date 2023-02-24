@@ -39,7 +39,7 @@ export const createDialog = async (
   });
 
   request.io
-    .to(recipientId.toString())
+    .to([recipientId.toString(), currentUserId.toString()])
     .emit('SERVER:CREATE_DIALOG', JSON.stringify(createdDialog));
 
   return reply.status(201).send(createdDialog);

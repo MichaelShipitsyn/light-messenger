@@ -12,10 +12,37 @@ import { SearchUser } from '@lm-client/features/search-user';
 import * as dialogsModel from '@lm-client/entities/dialog';
 import * as viewerModel from '@lm-client/entities/viewer';
 import * as userModel from '@lm-client/entities/user';
+import { useEffect } from 'react';
+import { useUnit } from 'effector-react';
+import { $io } from '@lm-client/shared/api';
 
 export const RootPage = createRouteView({
   route: viewerModel.viewerLoadedRoute,
   view() {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [socket, createDialog, createMessage] = useUnit([
+      $io,
+      dialogsModel.dialogCreated,
+      dialogsModel.newMessageSended,
+    ]);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      const createDialogListener = (data: string) => {
+        createDialog(JSON.parse(data));
+      };
+      const createMessageListener = (data: string) => {
+        createMessage(JSON.parse(data));
+      };
+
+      socket?.on('SERVER:CREATE_DIALOG', createDialogListener);
+      socket?.on('SERVER:CREATE_MESSAGE', createMessageListener);
+      return () => {
+        socket?.removeListener('SERVER:CREATE_DIALOG', createDialogListener);
+        socket?.removeListener('SERVER:CREATE_MESSAGE', createMessageListener);
+      };
+    }, [socket, createDialog, createMessage]);
+
     return (
       <>
         <Header />

@@ -33,7 +33,12 @@ const initializeServer = async (
   await server.register(security);
   await server.register(cookie, {} as FastifyCookieOptions);
   await server
-    .register(socketioServer)
+    .register(socketioServer, {
+      cors: {
+        origin: ['http://localhost:3000'],
+        credentials: true,
+      },
+    })
     .decorateRequest('io', { getter: () => server.io });
   await server.register(authJwt);
   await server.register(refreshJwt);

@@ -52,7 +52,7 @@ export const createMessage = async (
 
   if (recipientId) {
     request.io
-      .to(recipientId.toString())
+      .to([recipientId.toString(), currentUserId.toString()])
       .emit('SERVER:CREATE_MESSAGE', JSON.stringify(updatedDialog));
   }
 

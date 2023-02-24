@@ -8,6 +8,7 @@ const getDialogsFx = attach({ effect: api.getDialogsFx });
 export const $dialogs = restore(getDialogsFx.doneData, []);
 export const $dialogsStatus = status({ effect: getDialogsFx });
 export const newMessageSended = createEvent<Dialog>();
+export const dialogCreated = createEvent<Dialog>();
 
 sample({
   clock: viewerLoadedRoute.opened,
@@ -21,4 +22,9 @@ $dialogs.on(newMessageSended, (dialogs, updatedDialog) => {
     }
     return dialog;
   });
+});
+
+$dialogs.on(dialogCreated, (dialogs, newDialog) => {
+  console.log(newDialog);
+  return [...dialogs, newDialog];
 });
